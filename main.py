@@ -2,9 +2,10 @@ import os
 import hashlib
 
 from starlette.applications import Starlette
+from starlette import status
 from starlette.routing import Route
 from starlette.requests import Request
-from starlette.responses import FileResponse, PlainTextResponse
+from starlette.responses import FileResponse, PlainTextResponse, JSONResponse
 
 from preview_generator.manager import PreviewManager
 
@@ -14,6 +15,10 @@ CACHE_PATH = '/tmp/cache/'
 
 
 manager = PreviewManager(CACHE_PATH, create_folder=True)
+
+
+def error_response(error_message, status=None):
+    return JSONResponse({"error": error_message}, status_code=status)
 
 
 async def _store_uploaded_file(file) -> str:
@@ -36,9 +41,15 @@ async def preview_endpoint(request):
     height = request.path_params['height']
 
     form = await request.form()
-    file_path = await _store_uploaded_file(form['file'])
+    file = form.get('file', None)
+    if file is None:
+        return error_response('"file" is missing', status.HTTP_400_BAD_REQUEST)
+    file_path = await _store_uploaded_file(file)
 
-    image = manager.get_jpeg_preview(file_path, width=width, height=height)
+    try:
+        image = manager.get_jpeg_preview(file_path, width=width, height=height)
+    except Exception as e:
+        return error_response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return FileResponse(image)
 
