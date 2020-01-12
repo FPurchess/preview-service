@@ -19,7 +19,7 @@ manager = PreviewManager(CACHE_PATH, create_folder=True)
 async def _store_uploaded_file(file) -> str:
     contents = await file.read()
     h = hashlib.md5(contents).hexdigest()
-    upload_dest = os.path.join(UPLOAD_DIR, h)
+    upload_dest = os.path.join(UPLOAD_DIR, '.'.join([h, file.filename]))
 
     with open(upload_dest, 'wb') as f:
         f.write(contents)
