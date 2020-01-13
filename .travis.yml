@@ -1,5 +1,5 @@
 ---
-sudo: true
+os: linux
 language: python
 dist: xenial
 
@@ -7,7 +7,7 @@ install:
   - sudo rm -f /etc/ImageMagick-6/policy.xml
   - sudo apt-get install xvfb libreoffice libfile-mimeinfo-perl inkscape poppler-utils qpdf imagemagick libimage-exiftool-perl ufraw-batch ffmpeg ghostscript -y
   - pip install xvfbwrapper
-  - pip install pytest
+  - pip install pytest requests
   - pip install -U -r requirements.txt
 
 before_script:
