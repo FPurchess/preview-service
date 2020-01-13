@@ -42,11 +42,18 @@ Returns 200 OK when the service is up and running.
 
 ### POST `/preview/{width}x{height}`
 
+Awaits a the file to be converted in a `multipart/form-data` with form name `file`.
+Returns the converted file as a file response if the conversion is successful.
+
 ```bash
 curl -o thumbnail.jpeg -F 'file=file_to_preview.pdf' http://localhost:8000/preview/100x100
 ```
 
 Creates a 100x100 JPEG thumbnail image of `file_to_preview.pdf` and stores it in `thumbnail.jpeg`.
+
+### GET `/cache/<cached-file>`
+
+Returns a cached converted file if present.
 
 ## Thanks
 

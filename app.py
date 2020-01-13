@@ -7,13 +7,22 @@ from starlette.applications import Starlette
 from starlette import status
 from starlette.routing import Route
 from starlette.requests import Request
-from starlette.responses import FileResponse, PlainTextResponse, JSONResponse
+from starlette.staticfiles import StaticFiles
+from starlette.responses import (
+    FileResponse,
+    JSONResponse,
+    PlainTextResponse,
+)
 
 from preview_generator.manager import PreviewManager
 
 
 UPLOAD_DIR = '/tmp/files/'
 CACHE_PATH = '/tmp/cache/'
+
+
+app = Starlette()
+app.mount('/cache', StaticFiles(directory=CACHE_PATH), name='cache')
 
 
 manager = PreviewManager(CACHE_PATH, create_folder=True)
@@ -34,10 +43,12 @@ async def _store_uploaded_file(file) -> str:
     return upload_dest
 
 
+@app.route('/')
 async def health_endpoint(request):
     return PlainTextResponse('OK')
 
 
+@app.route('/preview/{width:int}x{height:int}', methods=['POST'])
 async def preview_endpoint(request):
     width = request.path_params['width']
     height = request.path_params['height']
@@ -55,12 +66,6 @@ async def preview_endpoint(request):
 
     return FileResponse(image)
 
-
-app = Starlette(routes=[
-    Route('/', endpoint=health_endpoint),
-    Route('/preview/{width:int}x{height:int}',
-          endpoint=preview_endpoint, methods=['POST']),
-])
 
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
