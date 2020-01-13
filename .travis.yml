@@ -13,6 +13,7 @@ before_script:
   - export DISPLAY=:99.0
   - which Xvfb
   - Xvfb :99 -screen 0 1x1x16 > /dev/null 2>&1 &
+  - sudo mkdir -p /tmp/ && sudo chmod 0777 /tmp/
 
 cache: pip
 
