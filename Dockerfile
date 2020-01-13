@@ -20,6 +20,10 @@ RUN pip install -r requirements.txt
 COPY docker-entrypoint.sh /app/
 COPY main.py /app/
 
-EXPOSE 80
+RUN groupadd -r previewservice && useradd -r -s /bin/false -g previewservice previewservice
+RUN chown -R previewservice:previewservice /app
+USER previewservice
+
+EXPOSE 8000
 
 CMD ["./docker-entrypoint.sh"]
