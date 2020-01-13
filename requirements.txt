@@ -1,3 +1,4 @@
+uvicorn
 starlette
 preview-generator
 python-multipart

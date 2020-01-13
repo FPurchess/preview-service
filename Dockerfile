@@ -12,8 +12,6 @@ VOLUME /tmp/cache/
 
 WORKDIR /app
 
-RUN pip install uvicorn
-
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 

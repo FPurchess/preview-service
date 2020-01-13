@@ -1,6 +1,8 @@
 import os
 import hashlib
 
+import uvicorn
+
 from starlette.applications import Starlette
 from starlette import status
 from starlette.routing import Route
@@ -59,3 +61,6 @@ app = Starlette(routes=[
     Route('/preview/{width:int}x{height:int}',
           endpoint=preview_endpoint, methods=['POST']),
 ])
+
+if __name__ == "__main__":
+    uvicorn.run(app, host='0.0.0.0', port=8000, reload=True)
