@@ -1,10 +1,11 @@
 FROM python:3.7
 LABEL maintaner="Florian Purchess <florian@attacke.ventures>"
 
-RUN apt-get update -y && \
-    apt-get install -y zlib1g-dev libjpeg-dev python3-pythonmagick inkscape xvfb poppler-utils \
-    libfile-mimeinfo-perl qpdf libimage-exiftool-perl ufraw-batch ffmpeg \
-    scribus libreoffice
+RUN apt-get update && \
+  apt-get install -y zlib1g-dev libjpeg-dev python3-pythonmagick inkscape xvfb poppler-utils \
+  libfile-mimeinfo-perl qpdf libimage-exiftool-perl ufraw-batch ffmpeg \
+  scribus libreoffice \
+  && rm -rf /var/lib/apt/lists/*
 
 VOLUME /tmp/files/
 VOLUME /tmp/cache/
