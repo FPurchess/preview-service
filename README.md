@@ -1,5 +1,8 @@
 # preview-service
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Travis](https://img.shields.io/travis/FPurchess/preview-service/master.svg?logo=travis)](https://travis-ci.org/FPurchess/preview-service)
+
 Super slim webservice to generate thumbnail images for document files (pdf, odt, doc, docx), video files (mp4, flv, webm, ogv, wmv), 3D Files (ply, obj, stl) and many more using a simple HTTP API.
 
 This is a simple wrapper around [algoo/preview-generator](https://github.com/algoo/preview-generator).
