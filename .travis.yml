@@ -1,5 +1,18 @@
-dist: xenial
+---
+sudo: true
 language: python
+dist: xenial
+
+install:
+  - sudo rm -f /etc/ImageMagick-6/policy.xml
+  - sudo apt-get install xvfb libreoffice libfile-mimeinfo-perl inkscape poppler-utils qpdf imagemagick libimage-exiftool-perl ufraw-batch ffmpeg ghostscript -y
+  - pip install xvfbwrapper
+  - pip install tox pytest
+
+before_script:
+  - export DISPLAY=:99.0
+  - which Xvfb
+  - Xvfb :99 -screen 0 1x1x16 > /dev/null 2>&1 &
 
 cache: pip
 
@@ -11,9 +24,6 @@ matrix:
     - { python: "3.6", env: TOXENV=py36 }
     - { python: "3.7", env: TOXENV=py37 }
     - { python: "3.8", env: TOXENV=py38 }
-
-install:
-  - pip install tox
 
 script:
   - tox
