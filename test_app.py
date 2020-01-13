@@ -3,7 +3,7 @@ import io
 from starlette.responses import HTMLResponse
 from starlette.testclient import TestClient
 
-from main import app
+from app import app
 
 
 def test_health_endpoint_succeeds():
