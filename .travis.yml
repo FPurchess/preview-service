@@ -14,7 +14,8 @@ before_script:
   - export DISPLAY=:99.0
   - which Xvfb
   - Xvfb :99 -screen 0 1x1x16 > /dev/null 2>&1 &
-  - sudo mkdir -p /tmp/ && sudo chmod 0777 /tmp/
+  - sudo mkdir -p /tmp/files/ && sudo chmod 0777 /tmp/files/
+  - sudo mkdir -p /tmp/cache/ && sudo chmod 0777 /tmp/cache/
 
 python:
   - "3.6"

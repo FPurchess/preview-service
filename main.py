@@ -26,7 +26,7 @@ async def _store_uploaded_file(file) -> str:
     h = hashlib.md5(contents).hexdigest()
     upload_dest = os.path.join(UPLOAD_DIR, '.'.join([h, file.filename]))
 
-    with open(upload_dest, 'wb') as f:
+    with open(upload_dest, 'wb+') as f:
         f.write(contents)
 
     return upload_dest
