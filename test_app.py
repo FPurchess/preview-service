@@ -1,6 +1,5 @@
 import io
 
-from starlette.responses import HTMLResponse
 from starlette.testclient import TestClient
 
 from app import app
