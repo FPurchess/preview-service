@@ -9,6 +9,7 @@ starlette = "==0.16.0"
 preview-generator = {extras = ["all"], version = "*"}
 python-multipart = "==0.0.5"
 aiofiles = "==0.7.0"
+vtk = "*"
 
 [dev-packages]
 black = "*"
