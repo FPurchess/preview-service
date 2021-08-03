@@ -4,15 +4,14 @@ import hashlib
 import uvicorn
 
 from starlette.applications import Starlette
-from starlette import status
-from starlette.routing import Route
-from starlette.requests import Request
 from starlette.staticfiles import StaticFiles
+from starlette import status
 from starlette.responses import (
     FileResponse,
     JSONResponse,
     PlainTextResponse,
 )
+from starlette.datastructures import UploadFile
 
 from preview_generator.manager import PreviewManager
 
@@ -57,6 +56,9 @@ async def preview_endpoint(request):
     file = form.get("file", None)
     if file is None:
         return error_response('"file" is missing', status.HTTP_400_BAD_REQUEST)
+    if not isinstance(file, UploadFile):
+        return error_response('"file" must be a file', status.HTTP_400_BAD_REQUEST)
+
     file_path = await _store_uploaded_file(file)
 
     try:
@@ -68,4 +70,4 @@ async def preview_endpoint(request):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
