@@ -15,7 +15,7 @@ RUN curl -LO https://github.com/jgraph/drawio-desktop/releases/download/v${DRAWI
 
 WORKDIR /app
 
-RUN pip install pipenv
+RUN pip install pipenv vtk
 COPY Pipfile* /app/
 RUN pipenv install --system
 
