@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.9-buster
 LABEL maintaner="Florian Purchess <florian@attacke.ventures>"
 
 RUN apt-get update && \
