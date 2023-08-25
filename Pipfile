@@ -4,17 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-uvicorn = "==0.14.0"
-starlette = "==0.16.0"
-preview-generator = {extras = ["all"], version = "*"}
-python-multipart = "==0.0.5"
-aiofiles = "==0.7.0"
+uvicorn = "==0.23.2"
+starlette = "==0.31.0"
+preview-generator = {version = "==0.29", extras = ["all"]}
+python-multipart = "==0.0.6"
+aiofiles = "==23.2.1"
 
 [dev-packages]
 black = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
 
 [pipenv]
 allow_prereleases = true

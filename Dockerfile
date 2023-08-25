@@ -1,9 +1,9 @@
-FROM python:3.9-buster
+FROM python:3.11-bookworm
 LABEL maintaner="Florian Purchess <florian@attacke.ventures>"
 
 RUN apt-get update && \
   apt-get install -y poppler-utils qpdf libfile-mimeinfo-perl libimage-exiftool-perl ghostscript libsecret-1-0 zlib1g-dev libjpeg-dev \
-  libreoffice inkscape ufraw-batch ffmpeg xvfb \
+  libreoffice inkscape ffmpeg xvfb \
   libnotify4 libappindicator3-1 curl \
   scribus inkscape \
   && rm -rf /var/lib/apt/lists/*
